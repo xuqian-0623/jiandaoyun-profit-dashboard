@@ -77,15 +77,46 @@ if (-not (Test-Path -LiteralPath $cloudflaredPath)) {
     }
 }
 
+$credential = Get-ShareCredential
 $existingListener = Get-NetTCPConnection -LocalAddress 127.0.0.1 -LocalPort $sharePort -State Listen -ErrorAction SilentlyContinue
 if ($existingListener) {
+    $trackedServerPid = 0
+    $trackedTunnelPid = 0
+    if (Test-Path -LiteralPath $serverPidPath) {
+        [void][int]::TryParse((Get-Content -LiteralPath $serverPidPath -Raw).Trim(), [ref]$trackedServerPid)
+    }
+    if (Test-Path -LiteralPath $tunnelPidPath) {
+        [void][int]::TryParse((Get-Content -LiteralPath $tunnelPidPath -Raw).Trim(), [ref]$trackedTunnelPid)
+    }
+    $trackedServer = Get-Process -Id $trackedServerPid -ErrorAction SilentlyContinue
+    $trackedTunnel = Get-Process -Id $trackedTunnelPid -ErrorAction SilentlyContinue
+    $ourServerIsRunning = $trackedServer -and @($existingListener.OwningProcess) -contains $trackedServer.Id -and @("python", "pythonw") -contains $trackedServer.ProcessName
+    $ourTunnelIsRunning = $trackedTunnel -and $trackedTunnel.ProcessName -eq "cloudflared"
+    $existingTunnelText = @(
+        (Get-Content -LiteralPath $tunnelOutPath -Raw -ErrorAction SilentlyContinue),
+        (Get-Content -LiteralPath $tunnelErrorPath -Raw -ErrorAction SilentlyContinue)
+    ) -join "`n"
+    $existingUrlMatch = [regex]::Match($existingTunnelText, 'https://[a-z0-9-]+\.trycloudflare\.(?:com|app)')
+    if ($ourServerIsRunning -and $ourTunnelIsRunning -and $existingUrlMatch.Success) {
+        $shareUrl = $existingUrlMatch.Value
+        try { Set-Clipboard -Value $shareUrl } catch { }
+        Clear-Host
+        Write-Host "临时分享已经在运行" -ForegroundColor Green
+        Write-Host ""
+        Write-Host "访问地址：$shareUrl" -ForegroundColor Cyan
+        Write-Host "登录账号：$($credential.username)"
+        Write-Host "登录密码：$($credential.password)"
+        Write-Host ""
+        Write-Host "访问地址已复制到剪贴板。用完后双击“停止临时分享.cmd”。" -ForegroundColor Yellow
+        if (-not $NoBrowser) { Start-Process $shareUrl }
+        exit 0
+    }
     throw ('临时分享端口 {0} 已被占用。请先双击“停止临时分享.cmd”，然后重试。' -f $sharePort)
 }
 
 $pythonPath = Get-PythonPath
 if (-not $pythonPath) { throw "未找到 Python，无法启动临时分享。" }
 
-$credential = Get-ShareCredential
 $serverProcess = $null
 $tunnelProcess = $null
 $environmentNames = @("HOST", "PORT", "DASHBOARD_USERNAME", "DASHBOARD_PASSWORD", "ENABLE_SERVER_SYNC")
