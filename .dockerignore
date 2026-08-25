@@ -2,10 +2,12 @@
 .gitignore
 .deploy-staging
 config/api-key.dpapi
+config/share-access.dpapi
 data
 handoff
 logs
 tmp
+tools
 *.cmd
 *.tmp
 __pycache__

@@ -1,8 +1,10 @@
 config/api-key.dpapi
+config/share-access.dpapi
 data/
 handoff/
 logs/
 tmp/
+tools/cloudflared.exe
 *.tmp
 __pycache__/
 *.py[cod]
