@@ -1,0 +1,155 @@
+{
+  "documents": [
+    {
+      "sha256": "dd9e9d713bbf229da3fd7a03b3e9e774476a2510cc962452dc5db33c6235d8a6",
+      "source_name": "HF-MP-34.pdf",
+      "note": "扫描版PDF无文字层；以下数据按三页报关单逐行人工核对。仅录入销售产品相关行，排除BRACKET、TERMINAL、MOLD SET和MOLD ACCESSORIES。",
+      "lines": [
+        {
+          "hs_code": "8516.90.90",
+          "model": "DZ100",
+          "description": "ANTI-CORROSION STEEL PIPE (HEATING ELEMENT/DZ100)",
+          "quantity_c62": 18000,
+          "value_thb": 288086.53,
+          "value_usd_reference": 8920.80
+        },
+        {
+          "hs_code": "8516.90.90",
+          "model": "MO100 UPPER",
+          "description": "ANTI-CORROSION STEEL PIPE (HEATING ELEMENT/MO100 UPPER)",
+          "quantity_c62": 7800,
+          "value_thb": 355671.00,
+          "value_usd_reference": 11013.60
+        },
+        {
+          "hs_code": "8516.90.90",
+          "model": "MO100 UPPER",
+          "description": "ANTI-CORROSION STEEL PIPE (HEATING ELEMENT/MO100 UPPER)",
+          "quantity_c62": 10200,
+          "value_thb": 336742.31,
+          "value_usd_reference": 10427.46
+        },
+        {
+          "hs_code": "8516.90.90",
+          "model": "MO100 UPPER",
+          "description": "ANTI-CORROSION STEEL PIPE (HEATING ELEMENT/MO100 UPPER)",
+          "quantity_c62": 7500,
+          "value_thb": 144765.03,
+          "value_usd_reference": 4482.75
+        },
+        {
+          "hs_code": "8516.90.90",
+          "model": "MO100 UPPER",
+          "description": "ANTI-CORROSION STEEL PIPE (HEATING ELEMENT/MO100 UPPER)",
+          "quantity_c62": 1500,
+          "value_thb": 24007.21,
+          "value_usd_reference": 743.40
+        },
+        {
+          "hs_code": "8516.90.90",
+          "model": "MO100 UPPER",
+          "description": "ANTI-CORROSION STEEL PIPE (HEATING ELEMENT/MO100 UPPER)",
+          "quantity_c62": 18000,
+          "value_thb": 347436.08,
+          "value_usd_reference": 10758.60
+        },
+        {
+          "hs_code": "8516.90.90",
+          "model": "MO100 UPPER",
+          "description": "ANTI-CORROSION STEEL PIPE (HEATING ELEMENT/MO100 UPPER)",
+          "quantity_c62": 9000,
+          "value_thb": 144043.27,
+          "value_usd_reference": 4460.40
+        },
+        {
+          "hs_code": "8516.90.90",
+          "model": "MO100 UPPER",
+          "description": "ANTI-CORROSION STEEL PIPE (HEATING ELEMENT/MO100 UPPER)",
+          "quantity_c62": 5357,
+          "value_thb": 85737.78,
+          "value_usd_reference": 2654.93
+        },
+        {
+          "hs_code": "8516.90.29",
+          "model": "FN100",
+          "description": "HEATING COIL/FN100",
+          "quantity_c62": 560,
+          "value_thb": 24253.94,
+          "value_usd_reference": 751.04
+        }
+      ]
+    },
+    {
+      "sha256": "8d254ca2a7c101a9687e5e7be1751c4cf86edd93d41a351f5e90f6dc82726d6d",
+      "source_name": "DRAFT - MAPLE - INV. HF-MP-43.pdf",
+      "replace_auto": true,
+      "note": "文本层跨页读取导致型号、金额与C62数量错位；以下按三页报关单逐项人工核验。仅录入产品型号行，排除TERMINAL、BRACKET和HOOK。",
+      "lines": [
+        {
+          "hs_code": "8516.90.90",
+          "model": "AF140/AF180",
+          "description": "ANTI-CORROSION STEEL PIPE (HEATING ELEMENT/AF140/180)",
+          "quantity_c62": 9000,
+          "value_thb": 191471.39,
+          "value_usd_reference": 5656.50
+        },
+        {
+          "hs_code": "8516.90.90",
+          "model": "AFT08015",
+          "description": "ANTI-CORROSION STEEL PIPE (HEATING ELEMENT/AFT08015)",
+          "quantity_c62": 3525,
+          "value_thb": 69456.40,
+          "value_usd_reference": 2051.90
+        },
+        {
+          "hs_code": "8516.90.90",
+          "model": "AF140/AF180",
+          "description": "ANTI-CORROSION STEEL PIPE (HEATING ELEMENT/AF140/180)",
+          "quantity_c62": 5500,
+          "value_thb": 117010.30,
+          "value_usd_reference": 3456.75
+        },
+        {
+          "hs_code": "8516.90.90",
+          "model": "DCT400",
+          "description": "ANTI-CORROSION STEEL PIPE (HEATING ELEMENT/DCT400)",
+          "quantity_c62": 2600,
+          "value_thb": 93166.84,
+          "value_usd_reference": 2752.36
+        },
+        {
+          "hs_code": "8516.90.90",
+          "model": "DZ100",
+          "description": "ANTI-CORROSION STEEL PIPE (HEATING ELEMENT/DZ100)",
+          "quantity_c62": 4300,
+          "value_thb": 75848.26,
+          "value_usd_reference": 2240.73
+        },
+        {
+          "hs_code": "8516.90.29",
+          "model": "DC601",
+          "description": "HEATING TUBE/DC601",
+          "quantity_c62": 6000,
+          "value_thb": 208805.88,
+          "value_usd_reference": 6168.60
+        },
+        {
+          "hs_code": "8516.90.29",
+          "model": "TT1627R",
+          "description": "HEATING TUBE/TT1627R",
+          "quantity_c62": 13900,
+          "value_thb": 420073.31,
+          "value_usd_reference": 12409.92
+        },
+        {
+          "hs_code": "8516.90.29",
+          "model": "FN100",
+          "description": "HEATING TUBE/FN100",
+          "quantity_c62": 17920,
+          "value_thb": 849405.89,
+          "value_usd_reference": 25093.38
+        }
+      ]
+    }
+  ]
+}

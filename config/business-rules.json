@@ -1,0 +1,51 @@
+{
+  "outbound_type": "销售出库การขาย",
+  "outbound_confirmed": "确认ยืนยัน",
+  "active_price_status": "使用中",
+  "customer_aliases": {
+    "KSR": "KSR INDUSTRIES CO., LTD.（HEAD OFFICE）",
+    "TIANXI": "Tianxi Kitchen Appliances (Thailand) Co.,Ltd",
+    "SEIL": "Seil Control Thailand Co.,Ltd",
+    "BIYI": "BIYI/FUHAODA"
+  },
+  "price_model_aliases": {
+    "GX100-230V-1790W": "GX100-120V-1790W",
+    "AF180-220-240V-1700W": "AF180/AF140-120V-1700W"
+  },
+  "price_overrides_thb": {
+    "SEIL|FN100-120V-1500W": 53.2,
+    "TIANXI|TT1627R-UL-120V-1750W": 32.11
+  },
+  "cost_overrides_thb": {
+    "FS037A": 18.8694
+  },
+  "outbound_cost_families": {
+    "AF-816A-W-120V-1710W": "AF-U816A",
+    "AF180-220-240V-1700W": "AF140/AF180",
+    "AF180/AF140-120V-1700W": "AF140/AF180",
+    "AFT06015-UL-120V-1750W": "AFT06015",
+    "AFT08003B-UL 右-120V-1750W": "AFT08003B",
+    "AFT08003B-UL 左-120v-1750W": "AFT08003B",
+    "AFT08015-UL-120V-1750W": "AFT08015",
+    "AFT11015A-UL 右-120v-1700W": "AFT11015A",
+    "AFT11015A-UL 左-120V-1700W": "AFT11015A",
+    "DC601-120V-1700W": "DC601",
+    "DCT400-120V-1700W": "DCT400",
+    "DS16-120V-1675W": "DS16",
+    "DT10L-120V-1450W": "DT10L",
+    "DT200-120V-1700W": "DT200",
+    "DZ100-120V-1600W": "DZ100",
+    "FN100-120V-1500W": "FN100",
+    "FS037A-120V-1575W": "FS037A",
+    "FS037B-120V-1450W": "FS037B",
+    "GR100-120V-1450W": "GR100",
+    "GR100-230V-1450W": "GR100",
+    "MO100上-120V-1700W": "MO100 UPPER",
+    "MO100下-120V-1700W": "MO100 LOWER",
+    "MC2000-120V-1400W": "MC2000",
+    "TT1627R-UL-120V-1750W": "TT1627R"
+  },
+  "shared_cost_excluded_item_contains": [
+    "Import tax"
+  ]
+}

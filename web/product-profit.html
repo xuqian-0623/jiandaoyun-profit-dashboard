@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <title>产品毛利分析 · 泰国工厂经营看板</title>
+    <link rel="stylesheet" href="./styles.css?v=20260825-01" />
+  </head>
+  <body>
+    <main class="shell">
+      <header class="topbar">
+        <div class="title-block">
+          <p class="eyebrow">MAPLE · THAILAND OPERATIONS / PRODUCT MARGIN</p>
+          <div class="title-row">
+            <a class="back-link" href="./?v=20260824-23" aria-label="返回经营利润看板">←</a>
+            <h1>产品毛利分析</h1>
+          </div>
+          <p class="subtitle">按客户与型号查看销售收入、报关总成本和毛利贡献</p>
+        </div>
+        <div class="status-panel">
+          <span id="sync-dot" class="status-dot"></span>
+          <div><span class="status-label">数据状态</span><strong id="sync-status">正在读取…</strong></div>
+          <button id="refresh" type="button">立即刷新</button>
+        </div>
+      </header>
+
+      <section class="control-row product-filter-row" aria-label="筛选">
+        <label for="profit-month-select">销售月份</label>
+        <select id="profit-month-select"><option value="all">全部月份</option></select>
+        <label class="secondary-filter-label" for="profit-customer-select">客户</label>
+        <select id="profit-customer-select"><option value="all">全部客户</option></select>
+        <label class="secondary-filter-label" for="profit-model-search">产品型号</label>
+        <input id="profit-model-search" class="filter-search-input" type="search" placeholder="输入型号模糊匹配" autocomplete="off" aria-controls="profit-ledger-body" />
+        <span id="profit-filter-count" class="filter-result-count">—</span>
+        <span id="generated-at" class="generated-at"></span>
+      </section>
+
+      <section class="kpi-grid" aria-label="产品毛利指标">
+        <article class="kpi"><span>销售收入</span><strong id="profit-revenue">—</strong><small>销售出库数量 × 含税泰币单价</small></article>
+        <article class="kpi product-cost"><span>报关总成本</span><strong id="profit-cost">—</strong><small>出库数量 × 当前报关单台成本</small></article>
+        <article class="kpi profit"><span>产品毛利</span><strong id="profit-gross">—</strong><small>销售收入 − 报关总成本</small></article>
+        <article class="kpi"><span>产品毛利率</span><strong id="profit-margin">—</strong><small>产品毛利 ÷ 销售收入</small></article>
+      </section>
+
+      <section id="profit-warning" class="warning" hidden>
+        <div class="warning-mark">!</div>
+        <div><strong>当前筛选范围存在待补成本或单价</strong><p id="profit-warning-text"></p></div>
+      </section>
+
+      <div class="customs-note product-margin-note"><strong>口径提示</strong><span>本页展示产品毛利，不分摊房租、人工等公共费用。当前报关单台成本采用全部历史报关数量加权平均；如财务确认改为按时点移动加权，历史结果需要重新计算。</span></div>
+
+      <section class="panel cost-ledger-panel">
+        <div class="panel-heading">
+          <div>
+            <p class="section-kicker">PRODUCT MARGIN LEDGER</p>
+            <h2 id="profit-ledger-title">全部月份 · 全部客户 · 全部型号</h2>
+            <p class="panel-explainer">默认按产品毛利从高到低排列。点击任意一行可查看出库、售价和成本来源。</p>
+          </div>
+        </div>
+        <div class="table-wrap cost-ledger-table product-profit-table">
+          <table>
+            <thead><tr><th>客户 / 型号</th><th class="num">出库数量</th><th class="num">销售单价</th><th class="num">销售收入</th><th class="num">报关单台成本</th><th class="num">报关总成本</th><th class="num">产品毛利</th><th class="num">毛利率</th><th>完整性</th></tr></thead>
+            <tbody id="profit-ledger-body"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <footer>产品毛利不等于公司净利润；公司整体利润仍以经营利润看板为准。</footer>
+    </main>
+
+    <div id="drawer-backdrop" class="drawer-backdrop" hidden></div>
+    <aside id="source-drawer" class="source-drawer" aria-hidden="true" aria-labelledby="drawer-title">
+      <header class="drawer-header">
+        <div><p class="section-kicker">DATA LINEAGE</p><h2 id="drawer-title">产品毛利来源</h2><p id="drawer-subtitle"></p></div>
+        <button id="drawer-close" class="drawer-close" type="button" aria-label="关闭产品毛利来源">×</button>
+      </header>
+      <div id="drawer-content" class="drawer-content"></div>
+    </aside>
+    <script src="./filter-preview.js?v=20260825-01" defer></script>
+    <script src="./product-profit.js?v=20260825-01" defer></script>
+  </body>
+</html>

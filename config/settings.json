@@ -1,0 +1,81 @@
+{
+  "api_url": "https://api.jiandaoyun.com/api/v5/app/entry/data/list",
+  "app_id": "66f51542fac826ea0ef4117a",
+  "page_size": 100,
+  "datasets": [
+    {
+      "name": "purchases",
+      "entry_id": "66f515525c7e0dee4c1ac771",
+      "fields": [
+        "_widget_1517542638204",
+        "_widget_1638440938270",
+        "_widget_1727337817607",
+        "_widget_1727337817617",
+        "_widget_1727337817611",
+        "_widget_1517558654967",
+        "_widget_1747289765281",
+        "flowState"
+      ],
+      "local_filter": {
+        "rel": "and",
+        "cond": [
+          {
+            "field": "_widget_1517558654967",
+            "method": "starts_with",
+            "value": "PAYMENT SUCCESS/"
+          },
+          {
+            "field": "flowState",
+            "method": "not_eq",
+            "value": 2
+          }
+        ]
+      }
+    },
+    {
+      "name": "outbound",
+      "entry_id": "688c6cbc2a83f7d454d4a0e0",
+      "fields": [
+        "_widget_1754033341345",
+        "_widget_1754033341379",
+        "_widget_1779951185798",
+        "_widget_1754033341348",
+        "_widget_1754033341376"
+      ],
+      "local_filter": {
+        "rel": "and",
+        "cond": [
+          {
+            "field": "_widget_1754033341345",
+            "method": "eq",
+            "value": "销售出库การขาย"
+          },
+          {
+            "field": "_widget_1754033341376",
+            "method": "eq",
+            "value": "确认ยืนยัน"
+          }
+        ]
+      }
+    },
+    {
+      "name": "prices",
+      "entry_id": "68904c6547d58a844e075bb2",
+      "fields": [
+        "_widget_1754287205001",
+        "_widget_1754287205008",
+        "_widget_1754287205002",
+        "_widget_1760759318707",
+        "_widget_1760758549589"
+      ]
+    }
+  ],
+  "attachments": {
+    "dataset": "purchases",
+    "fields": [
+      "_widget_1727337817611"
+    ],
+    "item_field": "_widget_1727337817607",
+    "item_contains": "Import tax"
+  }
+}

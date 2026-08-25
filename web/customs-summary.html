@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <title>报关成本汇总 · 泰国工厂经营看板</title>
+    <link rel="stylesheet" href="./styles.css?v=20260825-01" />
+  </head>
+  <body>
+    <main class="shell">
+      <header class="topbar">
+        <div class="title-block">
+          <p class="eyebrow">MAPLE · THAILAND OPERATIONS / CUSTOMS COSTS</p>
+          <div class="title-row">
+            <a class="back-link" href="./?v=20260824-23" aria-label="返回经营利润看板">←</a>
+            <h1>报关成本汇总</h1>
+          </div>
+          <p class="subtitle">按报关月份和产品型号查看C62数量与申报货值</p>
+        </div>
+        <div class="status-panel">
+          <span id="sync-dot" class="status-dot"></span>
+          <div><span class="status-label">数据状态</span><strong id="sync-status">正在读取…</strong></div>
+          <button id="refresh" type="button">立即刷新</button>
+        </div>
+      </header>
+
+      <section class="control-row" aria-label="筛选">
+        <label for="customs-month-select">报关月份</label>
+        <select id="customs-month-select"><option value="all">全部月份</option></select>
+        <label class="secondary-filter-label" for="customs-model-search">产品型号</label>
+        <input id="customs-model-search" class="filter-search-input" type="search" placeholder="输入型号模糊匹配" autocomplete="off" aria-controls="customs-ledger-body" />
+        <span id="customs-filter-count" class="filter-result-count">—</span>
+        <span id="generated-at" class="generated-at"></span>
+      </section>
+
+      <section class="kpi-grid customs-kpi-grid" aria-label="报关成本指标">
+        <article class="kpi"><span>泰铢报关货值</span><strong id="customs-thb-total">—</strong><small>利润计算使用的原始泰铢金额</small></article>
+        <article class="kpi"><span>报关产品数量</span><strong id="customs-qty-total">—</strong><small>报关单中的C62数量</small></article>
+        <article class="kpi shared-cost"><span>美元货值参考</span><strong id="customs-usd-total">—</strong><small>仅供参考，不参与利润计算</small></article>
+        <article class="kpi"><span>成本型号</span><strong id="customs-model-count">—</strong><small>按已确认型号归并后的数量</small></article>
+      </section>
+
+      <div class="customs-note"><strong>口径提示</strong><span>本页汇总报关单中的原始数量与整批货值。“整批金额直接扣除”还是“折算单位成本后按销售数量结转”，待财务确认后再应用到利润，不影响本页原始数据。</span></div>
+
+      <section class="panel cost-ledger-panel">
+        <div class="panel-heading"><div><p class="section-kicker">CUSTOMS COST LEDGER</p><h2 id="customs-ledger-title">全部月份 · 全部型号</h2><p class="panel-explainer">点击任意型号可查看组成汇总的报关批次、申购记录和原始PDF附件。</p></div></div>
+        <div class="table-wrap cost-ledger-table">
+          <table>
+            <thead><tr><th>成本型号</th><th class="num">报关批次</th><th class="num">C62数量</th><th class="num">泰铢货值</th><th class="num">美元参考</th><th class="num">加权单位货值</th></tr></thead>
+            <tbody id="customs-ledger-body"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <footer>页面每60秒检查一次新数据；每条支付成功的 Import tax 记录只读取【相关资料】中的唯一PDF。</footer>
+    </main>
+
+    <div id="drawer-backdrop" class="drawer-backdrop" hidden></div>
+    <aside id="source-drawer" class="source-drawer" aria-hidden="true" aria-labelledby="drawer-title">
+      <header class="drawer-header">
+        <div><p class="section-kicker">DATA LINEAGE</p><h2 id="drawer-title">报关来源</h2><p id="drawer-subtitle"></p></div>
+        <button id="drawer-close" class="drawer-close" type="button" aria-label="关闭报关来源">×</button>
+      </header>
+      <div id="drawer-content" class="drawer-content"></div>
+    </aside>
+    <script src="./filter-preview.js?v=20260825-01" defer></script>
+    <script src="./customs-summary.js?v=20260825-01" defer></script>
+  </body>
+</html>

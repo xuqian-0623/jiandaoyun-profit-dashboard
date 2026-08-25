@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <title>泰国工厂经营看板</title>
+    <link rel="stylesheet" href="./styles.css?v=20260825-01" />
+  </head>
+  <body>
+    <main class="shell">
+      <header class="topbar">
+        <div class="title-block">
+          <p class="eyebrow">MAPLE · THAILAND OPERATIONS</p>
+          <div class="title-row">
+            <h1>经营利润看板</h1>
+            <button id="cost-summary-toggle" class="title-dropdown-toggle" type="button" aria-expanded="false" aria-controls="cost-summary-menu" aria-label="展开公共成本汇总">
+              <span class="chevron" aria-hidden="true"></span>
+            </button>
+          </div>
+          <p class="subtitle">销售出库、报关成本与已支付费用的统一视图</p>
+          <nav id="cost-summary-menu" class="dashboard-menu" aria-label="看板页面" hidden>
+            <a href="./product-profit.html?v=20260824-23">
+              <span>产品毛利分析</span>
+              <small>按月份、客户和型号查看产品成本与毛利</small>
+            </a>
+            <a href="./cost-summary.html?v=20260824-23">
+              <span>公共成本汇总</span>
+              <small>按月份和费用类型查看支出</small>
+            </a>
+            <a href="./customs-summary.html?v=20260824-23">
+              <span>报关成本汇总</span>
+              <small>按月份和型号查看报关货值</small>
+            </a>
+          </nav>
+        </div>
+        <div class="status-panel">
+          <span id="sync-dot" class="status-dot"></span>
+          <div>
+            <span class="status-label">数据状态</span>
+            <strong id="sync-status">正在读取…</strong>
+          </div>
+          <button id="refresh" type="button">立即刷新</button>
+        </div>
+      </header>
+
+      <section class="control-row" aria-label="筛选">
+        <label for="month-select">查看月份</label>
+        <select id="month-select"></select>
+        <span id="generated-at" class="generated-at"></span>
+      </section>
+
+      <section class="kpi-grid" aria-label="月度指标">
+        <article class="kpi revenue drillable" data-drill="revenue" role="button" tabindex="0">
+          <span>销售收入</span>
+          <strong id="kpi-revenue">—</strong>
+          <small>销售出库数量 × 含税泰币单价</small>
+        </article>
+        <article class="kpi product-cost drillable" data-drill="product-cost" role="button" tabindex="0">
+          <span>产品成本</span>
+          <strong id="kpi-product-cost">—</strong>
+          <span id="kpi-product-cost-usd" class="kpi-reference">美元参考 —</span>
+          <small>出库数量 × 报关加权单位成本</small>
+        </article>
+        <article class="kpi shared-cost drillable" data-drill="shared-cost" role="button" tabindex="0">
+          <span>公共费用</span>
+          <strong id="kpi-shared-cost">—</strong>
+          <small>本月支付成功的申购费用</small>
+        </article>
+        <article class="kpi profit drillable" data-drill="profit" role="button" tabindex="0">
+          <span id="profit-title">利润</span>
+          <strong id="kpi-profit">—</strong>
+          <small id="profit-note">收入 − 产品成本 − 公共费用</small>
+        </article>
+      </section>
+
+      <section id="warning" class="warning" hidden>
+        <div class="warning-mark">!</div>
+        <div>
+          <strong>本月利润暂不完整</strong>
+          <p id="warning-text"></p>
+        </div>
+      </section>
+
+      <section class="panel monthly-panel">
+        <div class="panel-heading">
+          <div>
+            <p class="section-kicker">MONTHLY TREND</p>
+            <h2>月度经营结果</h2>
+          </div>
+          <div class="legend">
+            <span><i class="legend-revenue"></i>收入</span>
+            <span><i class="legend-cost"></i>总成本</span>
+          </div>
+        </div>
+        <div id="trend" class="trend" aria-label="月度收入与成本趋势"></div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>月份</th>
+                <th class="num">销售收入</th>
+                <th class="num">产品成本</th>
+                <th class="num">公共费用</th>
+                <th class="num">利润</th>
+                <th>完整性</th>
+              </tr>
+            </thead>
+            <tbody id="monthly-body"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="panel comparison-panel">
+        <div class="panel-heading">
+          <div>
+            <p class="section-kicker">MONTHLY MODEL FLOW</p>
+            <h2>本月型号出库与报关对比</h2>
+            <p class="panel-explainer">按所选月份汇总同一型号的销售出库数量和报关C62数量。数量差额只反映当月流入流出，不代表实际库存。</p>
+          </div>
+          <div class="comparison-search">
+            <label for="comparison-model-search">筛选型号</label>
+            <input id="comparison-model-search" type="search" placeholder="输入型号模糊匹配" autocomplete="off" aria-controls="comparison-body" />
+            <span id="comparison-result-count">—</span>
+          </div>
+        </div>
+        <div class="table-wrap comparison-table">
+          <table>
+            <thead>
+              <tr>
+                <th>型号</th>
+                <th class="num">销售出库数量</th>
+                <th class="num">报关数量 C62</th>
+                <th class="num">数量差额</th>
+                <th class="num">报关明细</th>
+                <th>状态</th>
+              </tr>
+            </thead>
+            <tbody id="comparison-body"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <footer>页面每 60 秒检查一次新数据；本机计划程序每 5 分钟同步简道云。</footer>
+    </main>
+
+    <div id="drawer-backdrop" class="drawer-backdrop" hidden></div>
+    <aside id="source-drawer" class="source-drawer" aria-hidden="true" aria-labelledby="drawer-title">
+      <header class="drawer-header">
+        <div>
+          <p class="section-kicker">DATA LINEAGE</p>
+          <h2 id="drawer-title">数据来源</h2>
+          <p id="drawer-subtitle"></p>
+        </div>
+        <button id="drawer-close" class="drawer-close" type="button" aria-label="关闭数据来源菜单">×</button>
+      </header>
+      <div id="drawer-content" class="drawer-content"></div>
+    </aside>
+    <script src="./filter-preview.js?v=20260825-01" defer></script>
+    <script src="./app.js?v=20260825-01" defer></script>
+  </body>
+</html>

@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: jiandaoyun-profit-dashboard
+    runtime: docker
+    plan: starter
+    region: singapore
+    healthCheckPath: /api/health
+    envVars:
+      - key: JIANDAOYUN_API_KEY
+        sync: false
+      - key: DASHBOARD_USERNAME
+        sync: false
+      - key: DASHBOARD_PASSWORD
+        sync: false
+      - key: ENABLE_SERVER_SYNC
+        value: "true"
+      - key: SYNC_INTERVAL_SECONDS
+        value: "300"
+    disk:
+      name: dashboard-data
+      mountPath: /app/data
+      sizeGB: 1

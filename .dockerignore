@@ -1,0 +1,12 @@
+.git
+.gitignore
+.deploy-staging
+config/api-key.dpapi
+data
+handoff
+logs
+tmp
+*.cmd
+*.tmp
+__pycache__
+*.pyc

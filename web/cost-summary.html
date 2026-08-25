@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <title>公共成本占比分析 · 泰国工厂经营看板</title>
+    <link rel="stylesheet" href="./styles.css?v=20260825-02" />
+  </head>
+  <body>
+    <main class="shell">
+      <header class="topbar">
+        <div class="title-block">
+          <p class="eyebrow">MAPLE · THAILAND OPERATIONS / PUBLIC COSTS</p>
+          <div class="title-row">
+            <a class="back-link" href="./?v=20260824-23" aria-label="返回经营利润看板">←</a>
+            <h1>公共成本汇总</h1>
+          </div>
+          <p class="subtitle">按月份与费用类型分析累计支出、环比变化及销售收入占比</p>
+        </div>
+        <div class="status-panel">
+          <span id="sync-dot" class="status-dot"></span>
+          <div>
+            <span class="status-label">数据状态</span>
+            <strong id="sync-status">正在读取…</strong>
+          </div>
+          <button id="refresh" type="button">立即刷新</button>
+        </div>
+      </header>
+
+      <section class="control-row" aria-label="筛选">
+        <label for="cost-month-select">查看月份</label>
+        <select id="cost-month-select"><option value="all">全部月份</option></select>
+        <label class="secondary-filter-label" for="cost-category-search">费用类型</label>
+        <input id="cost-category-search" class="filter-search-input" type="search" placeholder="输入费用类型模糊匹配" autocomplete="off" aria-controls="cost-ledger-body" />
+        <span id="cost-filter-count" class="filter-result-count">—</span>
+        <span id="generated-at" class="generated-at"></span>
+      </section>
+
+      <section class="kpi-grid cost-analysis-kpi-grid" aria-label="公共成本指标">
+        <article class="kpi">
+          <span>公摊费用累计</span>
+          <strong id="cost-total">—</strong>
+          <small id="cost-scope-note">当前筛选范围，不包含 Import tax</small>
+        </article>
+        <article class="kpi">
+          <span>较上月变化</span>
+          <strong id="cost-mom-change">—</strong>
+          <small id="cost-mom-note">当前月与上一个自然月比较</small>
+        </article>
+        <article class="kpi shared-cost">
+          <span>占销售收入比例</span>
+          <strong id="cost-revenue-share">—</strong>
+          <small id="cost-revenue-note">公摊费用 ÷ 同期销售收入</small>
+        </article>
+        <article class="kpi">
+          <span>费用类型</span>
+          <strong id="category-count">—</strong>
+          <small><b id="record-count">—</b> 条支付成功记录</small>
+        </article>
+      </section>
+
+      <section class="panel cost-ledger-panel">
+        <div class="panel-heading">
+          <div>
+            <p class="section-kicker">MONTHLY COST SHARE</p>
+            <h2 id="ledger-title">按月份与类型累计</h2>
+            <p class="panel-explainer">金额按申购单“年月”字段归属；环比使用同一费用类型的上一个自然月金额，占比使用该月完整销售收入。点击任意一行可查看原始记录。</p>
+          </div>
+        </div>
+        <div class="table-wrap cost-ledger-table">
+          <table>
+            <thead>
+              <tr><th>月份</th><th>费用类型</th><th class="num">记录数</th><th class="num">累计金额（泰铢）</th><th class="num">较上月</th><th class="num">占销售收入</th></tr>
+            </thead>
+            <tbody id="cost-ledger-body"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <div class="cost-analysis-grid">
+        <section class="panel cost-ranking-panel">
+          <div class="panel-heading">
+            <div>
+              <p class="section-kicker">HISTORICAL CATEGORY RANKING</p>
+              <h2 id="history-title">历史费用类型排名</h2>
+              <p id="history-note" class="panel-explainer">按历史累计金额由高到低排序。</p>
+            </div>
+          </div>
+          <div class="table-wrap insight-table-wrap">
+            <table>
+              <thead><tr><th>排名</th><th>费用类型</th><th class="num">累计金额</th><th class="num">占公摊费用</th></tr></thead>
+              <tbody id="history-category-body"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="panel cost-surge-panel">
+          <div class="panel-heading">
+            <div>
+              <p class="section-kicker">MONTHLY COST SURGE</p>
+              <h2 id="surge-title">本月上涨费用类型</h2>
+              <p id="surge-note" class="panel-explainer">按较上月增加金额由高到低排列。</p>
+            </div>
+          </div>
+          <div class="table-wrap insight-table-wrap">
+            <table>
+              <thead><tr><th>费用类型</th><th class="num">本月金额</th><th class="num">增加金额</th><th class="num">涨幅</th></tr></thead>
+              <tbody id="cost-surge-body"></tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+
+      <footer>页面每 60 秒检查一次新数据；公共成本仅统计支付成功且未列为 Import tax 的申购费用。</footer>
+    </main>
+
+    <div id="drawer-backdrop" class="drawer-backdrop" hidden></div>
+    <aside id="source-drawer" class="source-drawer" aria-hidden="true" aria-labelledby="drawer-title">
+      <header class="drawer-header">
+        <div>
+          <p class="section-kicker">DATA LINEAGE</p>
+          <h2 id="drawer-title">费用来源</h2>
+          <p id="drawer-subtitle"></p>
+        </div>
+        <button id="drawer-close" class="drawer-close" type="button" aria-label="关闭费用来源">×</button>
+      </header>
+      <div id="drawer-content" class="drawer-content"></div>
+    </aside>
+    <script src="./filter-preview.js?v=20260825-01" defer></script>
+    <script src="./cost-summary.js?v=20260825-02" defer></script>
+  </body>
+</html>
